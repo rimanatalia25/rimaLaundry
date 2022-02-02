@@ -9,6 +9,6 @@ class Paket extends Model
 {
     use HasFactory;
     
-    public $table = 'tb_pakets';
+    public $table = 'Paket';
     protected $fillable = ['id_outlet', 'jenis', 'nama_paket', 'harga'];
 }

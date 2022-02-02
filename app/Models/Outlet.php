@@ -10,7 +10,7 @@ class Outlet extends Model
     use HasFactory;
 
     use HasFactory;
-    public $table = 'tb_outlets';
+    public $table = 'Outlet';
     protected $fillable = ['nama', 
                             'alamat', 
                             'tlp'];

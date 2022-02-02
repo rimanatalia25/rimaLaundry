@@ -9,6 +9,6 @@ class Member extends Model
 {
     use HasFactory;
 
-    public $table = 'tb_members';
+    public $table = 'Member';
     protected $fillable = ['nama', 'alamat', 'jenis_kelamin', 'tlp'];
 }
