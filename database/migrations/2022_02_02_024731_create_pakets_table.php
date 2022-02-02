@@ -13,8 +13,12 @@ class CreatePaketsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pakets', function (Blueprint $table) {
+        Schema::create('paket', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_outlet');
+            $table->enum('jenis', ['kiloan', 'selimut', 'bed_cover', 'kaos', 'kain']);
+            $table->string('nama_paket', 100);
+            $table->integer('harga');
             $table->timestamps();
         });
     }
