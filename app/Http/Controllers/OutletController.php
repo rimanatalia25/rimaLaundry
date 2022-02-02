@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Outlet;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreOutletRequest;
 use App\Http\Requests\UpdateOutletRequest;
 
@@ -15,37 +16,26 @@ class OutletController extends Controller
      */
     public function index()
     {
-        //
+        $data = Outlet::all();
+        return view('outlet/outlet', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        $model = new Outlet;
+        return view('outlet/outlet', compact('model'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreOutletRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreOutletRequest $request)
+ 
+    public function store(Request $request)
     {
-        //
+        Outlet::create($request->all());
+        return redirect ('outlet');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Outlet  $outlet
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Outlet $outlet)
+  
+    public function show(Outlet $Outlet)
     {
         //
     }
@@ -53,34 +43,30 @@ class OutletController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Outlet  $outlet
+     * @param  \App\Models\Outlet  $Outlet
      * @return \Illuminate\Http\Response
      */
-    public function edit(Outlet $outlet)
+    public function edit($id)
     {
-        //
+        $model = Outlet::find($id);
+        return view('outlet/edit', compact(
+            'model'
+        ));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateOutletRequest  $request
-     * @param  \App\Models\Outlet  $outlet
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateOutletRequest $request, Outlet $outlet)
+    public function update(Request $request, $id)
     {
-        //
+        $model = Outlet::findOrFail($id)->update($request->all());
+
+        // $model->save();
+
+        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Outlet  $outlet
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Outlet $outlet)
+    public function destroy($id)
     {
-        //
+        $model = Outlet::find($id);
+        $model->delete();
+        return redirect('outlet');
     }
 }

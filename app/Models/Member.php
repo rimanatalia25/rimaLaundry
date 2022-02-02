@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Member extends Model
 {
     use HasFactory;
+
+    public $table = 'tb_members';
+    protected $fillable = ['nama', 'alamat', 'jenis_kelamin', 'tlp'];
 }

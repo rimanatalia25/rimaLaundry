@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
 
@@ -15,7 +16,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        $data = Member::all();
+        return view('member/member', compact('data'));
     }
 
     /**
@@ -25,27 +27,29 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        $model = new Member;
+        return view('member/member', compact('model'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreMemberRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMemberRequest $request)
+    public function store(Request $request)
     {
-        //
+        Member::create($request->all());
+        return redirect ('member');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Member  $member
+     * @param  \App\Models\Member  $Member
      * @return \Illuminate\Http\Response
      */
-    public function show(Member $member)
+    public function show(Member $Member)
     {
         //
     }
@@ -53,34 +57,30 @@ class MemberController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Member  $member
+     * @param  \App\Models\Member  $Member
      * @return \Illuminate\Http\Response
      */
-    public function edit(Member $member)
+    public function edit($id)
     {
-        //
+        $model = Member::find($id);
+        return view('member/edit', compact(
+            'model'
+        ));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMemberRequest  $request
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateMemberRequest $request, Member $member)
+    public function update(Request $request, $id)
     {
-        //
+        $model = Member::findOrFail($id)->update($request->all());
+
+        // $model->save();
+
+        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Member $member)
+    public function destroy($id)
     {
-        //
+        $model = Member::find($id);
+        $model->delete();
+        return redirect('member');
     }
 }

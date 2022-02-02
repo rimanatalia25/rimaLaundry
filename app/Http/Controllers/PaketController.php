@@ -3,49 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paket;
+use App\Models\Outlet;
+use Illuminate\Http\Request;
 use App\Http\Requests\StorePaketRequest;
 use App\Http\Requests\UpdatePaketRequest;
 
 class PaketController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $data = Paket::all();
+        $outlet = Outlet::get();
+        return view('paket/paket', compact('data', 'outlet'));
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        $model = new Paket;
+        return view('paket/paket', compact('model'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorePaketRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorePaketRequest $request)
+ 
+    public function store(Request $request)
     {
-        //
-    }
+        Paket::create($request->all());
+        return redirect ('paket');
+    }   //
+    
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Paket  $paket
+     * @param  \App\Models\Paket  $Paket
      * @return \Illuminate\Http\Response
      */
-    public function show(Paket $paket)
+    public function show(Paket $Paket)
     {
         //
     }
@@ -53,34 +47,30 @@ class PaketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Paket  $paket
+     * @param  \App\Models\Paket  $Paket
      * @return \Illuminate\Http\Response
      */
-    public function edit(Paket $paket)
+    public function edit($id)
     {
-        //
+        $model = Paket::find($id);
+        return view('paket/edit', compact(
+            'model'
+        ));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePaketRequest  $request
-     * @param  \App\Models\Paket  $paket
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatePaketRequest $request, Paket $paket)
+    public function update(Request $request, $id)
     {
-        //
+        $model = Paket::findOrFail($id)->update($request->all());
+
+        // $model->save();
+
+        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Paket  $paket
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Paket $paket)
+    public function destroy($id)
     {
-        //
+        $model = Paket::find($id);
+        $model->delete();
+        return redirect('paket');
     }
 }
