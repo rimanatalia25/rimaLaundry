@@ -11,4 +11,9 @@ class Paket extends Model
     
     public $table = 'Paket';
     protected $fillable = ['id_outlet', 'jenis', 'nama_paket', 'harga'];
+
+    public function outlet()
+    {
+        return $this->belongsTo(Outlet::class, 'id_outlet', 'id');
+    }
 }
