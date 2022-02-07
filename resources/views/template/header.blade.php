@@ -9,17 +9,34 @@
 
     <title>Rima Laundry </title>
 
-    <link rel="icon" href="production/images/penguinicon.png" type="image/x-icon">
+    <link rel="icon" href="{{ asset('assets') }}/production/images/penguinicon.png" type="image/x-icon">
 
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="{{ asset('assets') }}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('assets') }}/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{ asset('assets') }}/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('assets') }}/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="{{ asset('assets') }}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="{{ asset('assets') }}/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/build/css/custom.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('assets') }}/build/css/custom.min.css" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -36,7 +53,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="production/images/profile.png" alt="..." class="img-circle profile_img">
+                <img src="{{ asset('assets') }}/production/images/profile.png" alt="{{ asset('assets') }}." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 
@@ -69,9 +86,6 @@
                   </li>
                 </ul>
               </div>
-
-              
-
             </div>
             <!-- /sidebar menu -->
 
@@ -86,7 +100,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="/login">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -104,7 +118,7 @@
                 <ul class=" navbar-right">
                   <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                      <img src="production/images/profile.png" alt="">Rima Natalia
+                      <img src="{{ asset('assets') }}/production/images/profile.png" alt="">Rima Natalia
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item"  href="javascript:;"> Profile</a>
@@ -113,11 +127,17 @@
                           <span>Settings</span>
                         </a>
                     <a class="dropdown-item"  href="javascript:;">Help</a>
-                      <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
-                    </div>
+
+                    <form action="/logout" method="post">
+                      @csrf
+                      <a class="dropdown-item" type="submit" href="/login"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                    </form>
+
+                  </div>
                   </li>
 
 
+                  
                   
                      
                     </ul>

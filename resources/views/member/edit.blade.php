@@ -40,7 +40,7 @@
                     </div>
                     
                     <br>
-                    <button class="btn btn-primary source" onclick="new PNotify({
+                    <button class="btn btn-success source" onclick="new PNotify({
                         title: 'Ubah member sukses',
                         text: 'Anda berhasil mengubah data!',
                         type: 'success',

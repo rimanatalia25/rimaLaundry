@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DetailTransaksiController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\PaketController;
@@ -27,3 +28,5 @@ Route::get('/', function () {
 Route::resource('/member', MemberController::class);
 Route::resource('/outlet', OutletController::class);
 Route::resource('/paket', PaketController::class);
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate']);

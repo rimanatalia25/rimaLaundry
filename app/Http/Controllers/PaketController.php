@@ -13,6 +13,7 @@ class PaketController extends Controller
     public function index()
     {
         $data = Paket::with('outlet')->get();
+     
         $outlet = Outlet::get();
         return view('paket/paket', compact('data', 'outlet'));
 

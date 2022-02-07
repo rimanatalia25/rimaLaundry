@@ -83,7 +83,7 @@
                                   title: 'Tambah paket sukses',
                                   text: 'Anda berhasil menambahkan data!',
                                   type: 'success',
-                                  styling: 'bootstrap5'
+                                  styling: 'bootstrap3'
                               });">Tambah data</button>
                               </form>
                         </div>
@@ -109,7 +109,7 @@
             @foreach ($data as $key =>$value)
             <tr>
                 <td>{{ $i = (isset($i)?++$i:$i=1) }}</td>
-                <td>{{ $value->outlet->nama }}</td>
+                <td>{{ $value->outlet == null ? '-' : $value->outlet->nama }}</td>
                 <td>{{ $value->jenis }}</td>
                 <td>{{ $value->nama_paket }}</td>
                 <td>{{ $value->harga }}</td>
@@ -123,7 +123,12 @@
                     <form action="{{ route('paket.destroy', $value->id) }}" method="POST">
                         @csrf
                         <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger" type="submit">Delete</button>
+                        <button class="btn btn-danger source" onclick="new PNotify({
+                          title: 'Hapus Berhasil!',
+                          text: 'Anda telah menghapus data',
+                          type: 'error',
+                          styling: 'bootstrap3'
+                      });">Hapus</button>
                     </form>
 
                   </td>

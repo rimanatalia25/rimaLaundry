@@ -66,11 +66,11 @@
                                     <input type="text" name="tlp" class="form-control" id="tlp" placeholder="...">
                                 </div>
                                 <button class="btn btn-primary source" onclick="new PNotify({
-                                  title: 'Tambah outlet sukses',
-                                  text: 'Anda berhasil menambahkan data!',
-                                  type: 'success',
-                                  styling: 'bootstrap5'
-                              });">Tambah data</button>
+                                  title: 'Tambah outlet sukses!',
+                                  text: 'Anda berhasil menambahkan data.',
+                                  type: 'info',
+                                  styling: 'bootstrap3'
+                              });">Tambah</button>
                               </form>
                         </div>
                         </div>
@@ -99,7 +99,7 @@
                 <td>{{ $value->tlp }}</td>
                 <td class="d-flex">
                     {{-- <a href="{{ url('produk/' . $value->nama_produk. '/edit') }}"><button class="btn btn-primary" type="submit">Update</button></a> --}}
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updatemodal{{ $value->id }}">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updatemodal{{ $value->id }}">
                         Update
                     </button>     
                     @include('outlet.edit')
@@ -107,7 +107,12 @@
                     <form action="{{ route('outlet.destroy', $value->id) }}" method="POST">
                         @csrf
                         <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger" type="submit">Delete</button>
+                        <button class="btn btn-danger source" onclick="new PNotify({
+                          title: 'Hapus Berhasil!',
+                          text: 'Anda telah menghapus data',
+                          type: 'error',
+                          styling: 'bootstrap3'
+                      });">Hapus</button>
                     </form>
 
                   </td>
