@@ -7,10 +7,8 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Dashboard</h3>
+                <h3>Paket</h3>
               </div>
-
-              
             </div>
 
             <div class="clearfix"></div>
@@ -19,7 +17,7 @@
               <div class="col-md-12 col-sm-12  ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>About Rima Laundry</h2>
+                    <h2>Pilih paket</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -30,6 +28,8 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+
+                  {{-- FILL IN THIS AREA --}}
 
                   {{-- START CAROUSEL --}}
                       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -52,11 +52,12 @@
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                             </a>
-                        </div>
+                      </div>
 
                     {{-- END CAROUSEL --}}
 
-                    <p></p>
+                  {{-- FILL IN THIS AREA END --}}
+                  
                   </div>
                 </div>
               </div>

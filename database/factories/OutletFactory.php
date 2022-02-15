@@ -14,7 +14,9 @@ class OutletFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nama' => $this->faker->name(),
+            'alamat' => $this->faker->address(),
+            'tlp' => $this->faker->phoneNumber()
         ];
     }
 }
