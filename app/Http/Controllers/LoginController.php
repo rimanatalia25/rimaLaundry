@@ -19,12 +19,23 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)){
-          
+        if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            return redirect()->intended('/');
+            if(Auth::user()->role == 'admin') {
+                return redirect('/');      
+            }elseif(Auth::user()->role == 'kasir') {
+                return redirect('/');
+            }elseif(Auth::user()->role == 'owner') {
+                return redirect('/');
+            }
         }
+
+        // return redirect()->intended('home');
+
+        // if (Auth::attempt($credentials)){
+        //     $request->session()->regenerate();
+        //     return redirect()->intended('/');
+        // }
 
         return back()->withErrors([
             'email' => 'Username atau password salah'

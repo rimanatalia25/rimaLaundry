@@ -39,5 +39,32 @@
 
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('assets') }}/build/js/custom.min.js"></script>
+{{-- data table --}}
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.js"></script>
+<script>
+  $(document).ready( function () {
+    $('#tableOutlet').DataTable({
+      "aLengthMenu": [[5,10,15,20], [5, 10, 15, 20]]
+    });
+
+    $('#tablePaket').DataTable({
+      "aLengthMenu": [[5,10,15,20], [5, 10, 15, 20]]
+    });
+
+    $('#tableMember').DataTable({
+      "aLengthMenu": [[5,10,15,20], [5, 10, 15, 20]]
+    });
+
+    $('#tableBarang').DataTable({
+      "aLengthMenu": [[5,10,15,20], [5, 10, 15, 20]]
+    });
+
+    $('#tableInventaris').DataTable({
+      "aLengthMenu": [[5,10,15,20], [5, 10, 15, 20]]
+    });
+} );
+</script>
+
+@stack('scripts')
 </body>
 </html>

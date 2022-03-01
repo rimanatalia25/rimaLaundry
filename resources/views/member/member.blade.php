@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="modal-body">
                                         {{-- @yield('createbarang') --}}
-                                        <form method="POST" action="{{ 'member' }}"> 
+                                        <form method="POST" action="{{ 'member' }}" > 
                                             @csrf
                                             <div class="form-group mb-3">
                                                 <label for="nama">Nama</label>
@@ -87,7 +87,7 @@
                             
                             {{-- Modal tambah end --}}
                   <div class="x_content table-responsive">
-                    <table class="table table-hover ">
+                    <table class="table table-hover " id="tableMember" >
                       <thead>
                         <tr>
                           <th>No.</th>
@@ -131,7 +131,18 @@
                       </tbody>
                     </table>
                   </div>
-                  
+
+
+
+                  {{-- Ekspor --}}
+                  <div style="margin-bottom: 20px; align:center">
+                    <a type="button" class="btn btn-light" id="btn-expor-xls" href="member/export/xls"><i class="fa fa-file-excel-o" style="color: forestgreen"></i> Expor XLS</a>
+                    <a type="button" class="btn btn-light" id="btn-expor-xls"><i class="fa fa-file-pdf-o" style="color:tomato"></i> Expor PDF</a>
+                  </div>
+                  {{-- Ekspor END --}}
+
+
+
 
                   {{-- FILL IN THIS AREA END --}}
                   

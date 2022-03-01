@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
         $users = [
 
             [
-                'name' => 'Admin',
+                'name' => 'admin',
                 'email' => 'admin@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt ('a'),
@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
                 'role' => 'admin'
             ],
             [
-                'name' => 'Owner',
+                'name' => 'owner',
                 'email' => 'owner@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt ('a'),
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
                 'role' => 'owner'
             ],
             [
-                'name' => 'Kasir',
+                'name' => 'kasir',
                 'email' => 'kasir@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt ('a'),

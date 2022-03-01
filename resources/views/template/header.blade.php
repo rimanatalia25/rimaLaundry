@@ -31,15 +31,33 @@
     <link href="{{ asset('assets') }}/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
     <link href="{{ asset('assets') }}/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
     <link href="{{ asset('assets') }}/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('assets') }}/build/css/custom.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('assets') }}/build/css/custom.min.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('assets') }}/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{ asset('assets') }}/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('assets') }}/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="{{ asset('assets') }}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="{{ asset('assets') }}/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="{{ asset('assets') }}/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('assets') }}/build/css/custom.min.css" rel="stylesheet">
+    {{-- Data table --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.css"/>
+</head>
 
-    <!-- Custom Theme Style -->
-    <link href="{{ asset('assets') }}/build/css/custom.min.css" rel="stylesheet">
-  </head>
 
-  <body class="nav-md">
+
+  <body class="nav-md ">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -63,29 +81,17 @@
             </div>
             <!-- /menu profile quick info -->
 
-            <br />
+            <br/>
 
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>General</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="/">Dashboard</a></li>
-                    </ul>
-                  </li>
-                
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="/member">Member</a></li>
-                      <li><a href="/outlet">Outlet</a></li>
-                      <li><a href="/paket">Paket</a></li>
-                      <li><a href="/transaksi">Transaksi</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
+              @if(auth()->user()->role == 'admin')
+                @include('template.sidebar-admin')
+              @elseif (auth()->user()->role == 'kasir')
+                @include('template.sidebar-kasir')
+              @elseif (auth()->user()->role == 'owner')
+                @include('template.sidebar-owner')    
+              @endif
             </div>
             <!-- /sidebar menu -->
 

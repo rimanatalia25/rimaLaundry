@@ -79,7 +79,7 @@
                 
                 {{-- Modal tambah end --}}
       <div class="x_content">
-        <table class="table table-hover">
+        <table class="table table-hover" id="tableOutlet">
           <thead>
             <tr>
               <th>No.</th>

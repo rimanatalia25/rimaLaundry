@@ -6,6 +6,8 @@ use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
+use App\Exports\MemberExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MemberController extends Controller
 {
@@ -17,7 +19,7 @@ class MemberController extends Controller
     public function index()
     {
         $data = Member::all();
-        return view('member/member', compact('data'));
+        return view('member/member', compact('data')); 
     }
 
     /**
@@ -82,5 +84,9 @@ class MemberController extends Controller
         $model = Member::find($id);
         $model->delete();
         return redirect('member');
+    }
+
+    public function exportToExcel(){
+        return Excel::download(new MemberExport, 'member.xlsx');
     }
 }

@@ -16,7 +16,6 @@ class PaketController extends Controller
      
         $outlet = Outlet::get();
         return view('paket/paket', compact('data', 'outlet'));
-
     }
 
 
