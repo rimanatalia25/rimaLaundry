@@ -52,11 +52,6 @@
                                 Perempuan:
                                 <input type="radio" class="flat" name="jk" id="jk" value="P" />
                             </p> <br>
-                            <label for="id"><b>Status Menikah* :</b>
-                              <option value="single">Single</option>
-                              <option value="couple">Couple</option></label>
-                            <input type="id" id="id" class="form-control" name="id" data-parsley-trigger="change" required /> <br>
-
                             
                             <button class="btn btn-primary" id="btnSimpan" type="submit">Submit</button>
                             <button class="btn btn-danger" id="btnReset" type="reset">Reset</button>

@@ -30,6 +30,95 @@
                   <div class="x_content">
 
                   {{-- FILL IN THIS AREA --}}
+
+                  <div class="card">
+                    <div class="card-header">
+                        <h3>Gaji Karyawan</h3>
+                    </div>
+                    <div class="card-body">
+
+                        <!-- start form for validation -->
+                      <form id="formKaryawan" data-parsley-validate>
+                          <label for="id"><b>ID Karyawan* :</b></label>
+                          <input type="id" id="id" class="form-control" name="id" data-parsley-trigger="change" required /> <br>
+
+                          <label for="nama"><b>Nama Karyawan * :</b></label>
+                          <input type="text" id="nama" class="form-control" name="nama" required /> <br>
+
+
+                          <label><b>Jenis Kelamin *:</b> </label>
+                          <p>
+                              Laki-laki:
+                              <input type="radio" class="flat" name="jk" id="jk" value="L" checked="" required /> 
+                              Perempuan:
+                              <input type="radio" class="flat" name="jk" id="jk" value="P" />
+                          </p> <br>
+
+                         
+                            <label for="status"><b> Status </b> </label>
+                            <select class="custom-select" aria-label="Default select example"  name="status" id="status">
+                              <option selected disabled value>Pilih Status </option>
+                              <option value="single">Single</option>
+                              <option value="couple">Couple</option>
+                            </select> <br> 
+                           
+                           
+                           <label for="anak"><b>Jumlah Anak * :</b></label>
+                           <input type="number" value="0" id="anak" class="form-control" name="anak" required /> <br>
+
+                          
+                            <label for="staticEmail"><b> Mulai Bekerja</b></label>
+                            <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="kerja" required> <br>
+  
+                          <button class="btn btn-primary" id="btnSimpan" type="submit">Submit</button>
+                          <button class="btn btn-danger" id="btnReset" type="reset">Reset</button>
+
+
+
+                      </form>
+                      <!-- end form for validations -->
+                    </div>
+                </div>
+
+                <br><br>
+
+                <div class="card">
+                  <div class="card-header">
+                      <h3>Data</h3>
+                  </div>
+                  <div class="card-body">
+
+                    <div class="form-group row">
+                      <div class="col-12">
+                        <div class="form-group row d-flex ml-1">
+                        <button class="btn btn-success col-sm-2" type="button" id="sorting">Sorting</button>
+                        <span class="col-3"></span>
+                        <input type="search" name="search" id="search" class="form-control col-sm-4">
+                        <button class="btn btn-success col-sm-2" type="button" id="btnSearch">Search</button>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  
+                      <table class="table table-striped table-hover table-bordered" id="tblKaryawan">
+                          <thead>
+                            <tr>
+                              <th>ID Karyawan</th>
+                              <th>Nama Karyawan</th>
+                              <th>Jenis Kelamin</th>
+                              <th>Status Menikah</th>
+                              <th>Jumlah Anak</th>
+                              <th>Mulai Bekerja</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td colspan="6" align="center">Belum ada data</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                  </div>
+              </div>
                  
 
                   
@@ -50,7 +139,7 @@
 
 @endsection
 
-{{-- @push('scripts')
+@push('scripts')
 <script>
     function insert(){
       const data = $('#formKaryawan').serializeArray()
@@ -73,6 +162,9 @@
       row += `<td>${item['id']}</td>`
       row += `<td>${item['nama']}</td>`
       row += `<td>${item['jk']}</td>`
+      row += `<td>${item['status']}</td>`
+      row += `<td>${item['anak']}</td>`
+      row += `<td>${item['kerja']}</td>`
       row += `</tr>`
     })
     return row
@@ -136,26 +228,26 @@
       return i
     }
     return -1
-  } --}}
+  } 
 
   // const searching = (arr, text) => {
-  //   if (text !== ''){
-  //     let data = []
-  //     for (let index = 0; index< arr.length; index++){
-  //       for (const key in arr[index]) {
-  //         const value = arr[index] [key].toString(
-  //           for (let x = 0; x < value.length; x++){
-  //             if (value.substring(x, x + text.length).toLowerCase() == text.toLowerCase()){
-  //               data.push(dataKaryawan[index])
-  //               break;
-  //             }
-  //           }
-  //         )
-  //       }
-  //     }
-  //   }
-  // }
+  //    if (text !== ''){
+  //      let data = []
+  //      for (let index = 0; index< arr.length; index++){
+  //        for (const key in arr[index]) {
+  //          const value = arr[index] [key].toString(
+  //            for (let x = 0; x < value.length; x++){
+  //              if (value.substring(x, x + text.length).toLowerCase() == text.toLowerCase()){
+  //                data.push(dataKaryawan[index])
+  //                break;
+  //              }
+  //            }
+  //          )
+  //        }
+  //      }
+  //    }
+  //  } 
 
-{{-- </script> --}}
+</script>
     
 @endpush

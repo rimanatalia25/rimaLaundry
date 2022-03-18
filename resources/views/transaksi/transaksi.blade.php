@@ -139,7 +139,7 @@
               let data= ''
               let tbody = $('#tblTransaksi tbody tr td').text()
               data += '<tr>'
-              data += `<td> ${namaPaket} </td>`
+              data += `<td> ${namaPaket} </td>`; 
               data += `<td> ${harga} </td>`;
               data += `<input type="hidden" name="id_paket[]" value="${idPaket}">`
               data += `<td><input type="number" value="1" min="1" class="qty" name="qty[]" size="2 " style="width:40px"></td>`;
