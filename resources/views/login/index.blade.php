@@ -33,7 +33,7 @@
           <section class="login_content">
 
             {{-- form --}}
-            <form action="login" method="post">
+            <form action="{{ route('login') }}" method="post">
                 @csrf
               <h1>Login Form</h1>
               <div>

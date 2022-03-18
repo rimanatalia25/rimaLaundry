@@ -8,6 +8,8 @@ use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
 use App\Exports\MemberExport;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+use App\Imports\MemberImport;
 
 class MemberController extends Controller
 {
@@ -83,10 +85,25 @@ class MemberController extends Controller
     {
         $model = Member::find($id);
         $model->delete();
-        return redirect('member');
+        return back();
     }
 
     public function exportToExcel(){
         return Excel::download(new MemberExport, 'member.xlsx');
+    }
+
+    public function cetakPDF()
+    {
+        $member = Member::all();
+
+        // $pdf = PDF::loadview('member_pdf', ['member' => $member]);
+        // return $pdf->download('laporan-member-pdf');
+    }
+
+    public function importData(Request $request){
+        // dd( $request->file('import'));
+        Excel::import(new MemberImport, $request->file('import'));
+
+        return back()->with('success', 'Import Data Member BErhasil!!');
     }
 }

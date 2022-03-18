@@ -53,6 +53,8 @@
     <link href="{{ asset('assets') }}/build/css/custom.min.css" rel="stylesheet">
     {{-- Data table --}}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.css"/>
+    <!-- Custom styling plus plugins -->
+    <link href="{{ asset('assets') }}/build/css/custom.min.css" rel="stylesheet">
 </head>
 
 
@@ -141,11 +143,6 @@
 
                   </div>
                   </li>
-
-
-                  
-                  
-                     
                     </ul>
                   </li>
                 </ul>

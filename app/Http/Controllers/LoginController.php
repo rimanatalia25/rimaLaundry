@@ -19,6 +19,24 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+        // if (Auth::attemp($credentials)){
+        //     $request->session()->regenerate();
+
+        //     if (Auth::user()->role == 'admin'){
+        //         return redirect()->route('a.welcome');
+        //     }else if (Auth::user()->role == 'kasir'){
+        //         return redirect()->route('k.welcome');
+        //     }else if (Auth::user()->role == 'owner'){
+        //         return redirect()->route('o.welcome');
+        //     }
+
+        //     return back()->withErrors([
+        //         'email' => 'Username atau Password salah.',
+        //     ]);
+        // }
+
+    
+
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if(Auth::user()->role == 'admin') {
@@ -29,13 +47,6 @@ class LoginController extends Controller
                 return redirect('/');
             }
         }
-
-        // return redirect()->intended('home');
-
-        // if (Auth::attempt($credentials)){
-        //     $request->session()->regenerate();
-        //     return redirect()->intended('/');
-        // }
 
         return back()->withErrors([
             'email' => 'Username atau password salah'

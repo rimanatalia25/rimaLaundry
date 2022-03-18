@@ -14,14 +14,14 @@
                     <div class="form-group row col-6">
                         <label for="inputPassword" class="col-4 col-form-label">Estimasi Selesai</label>
                         <div class="col-6 ml-auto">
-                            <input type="date" class="form-control ml-auto" name="bataswaktu" id="bataswaktu" value="{{ date('Y-m-d', strtotime(date('Y-m-d').'+3 day')) }}">
+                            <input type="date" class="form-control ml-auto" name="batas_waktu" value="{{ date('Y-m-d', strtotime(date('Y-m-d').'+3 day')) }}">
                         </div>
                     </div>
                 </div>
 
                 <div class="row col-12" >
                     <div class="form-group row  col-6">
-                        <label for="" class="col-sm-4 col-form-label"><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalMember"><i class="fa-plus-square"></i></button>Nama Pelanggan/JK</label>
+                        <label for="" class="col-sm-4 col-form-label"><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalMember"><i class="fa fa-plus-square"></i></button>Nama Pelanggan/JK</label>
 
                         <label class="col-sm-6 col-form-label" id="nama-pelanggan" style="font-weight: normal"> - </label>
                     </div>
@@ -62,7 +62,7 @@
                                 @foreach ($member as $b)
                                 <tr>
                                     <td>{{ $i = (!isset($i)?1:++$i) }}
-                                        <input type="hidden" class="idMember" name="idMember" value="{{ $b->id }}">
+                                        <input type="hidden" class="idMember" name="id_member">
                                     </td>
                                     <td>{{ $b->nama }}</td>
                                     <td>{{ $b->jenis_kelamin }}</td>
@@ -95,21 +95,51 @@
 
                 <div class="clearfix">&nbsp;</div>
                 <div class="row">
-                    <table id="tblTransaksi" class="table table-striped table-bordered bulk_action">
+                    <table id="tblTransaksi" class="table table-sm table-compact table-striped table-bordered bulk_action">
                         <thead>
                             <tr>
                                 <th>Nama Paket</th>
                                 <th>Harga</th>
                                 <th>Qty</th>
                                 <th>Total</th>
-                                <th>Action</th>
+                                <th width="15%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="5" style="text-align:center;font-style:italic"> Belum ada Data</td>
+                                <td colspan="5" style="text-align:center;font-style:italic">Belum ada Data</td>
                             </tr>
                         </tbody>
+
+                        <tfoot>
+                            <tr valign="bottom">
+                                <td width="" colspan="3" align="right">Jumlah bayar</td>
+                                <td><span id="subtotal">0</span></td>
+                                <td rowspan="4">
+                                    <label for="">Pembayaran</label>
+                                    <input type="text" class="form-control" name="bayar" id="" style="width: 170px" value="">
+                                    <div>
+                                        <button class="btn btn-primary" type="submit" style="margin-top: 10px;width=170px">Bayar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">Diskon</td>
+                                <td><input type="number" value="0" id="diskon" name="diskon" style="width:140px"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">Pajak <input type="number" value="0" min="0" class="qty" name="pajak" id="pajak-persen" size="2" style="width:40px"></td>
+                                <td><span id="pajak-harga">0</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">Biaya Tambahan</td>
+                                <td><input type="number" name="biaya_tambahan" style="width: 140px" value="0"></td>
+                            </tr>
+                            <tr style="background:black;color:white;font-weight:bold;font-size:1em">
+                                <td colspan="3" align="right">Total bayar akhir</td>
+                                <td><span id="total">0</span></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -125,7 +155,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button>      
                     </div>
                     <div class="modal-body">
-                        <table id='tblPaket tablePaket' class="table table-stripped table-compact" >
+                        <table id='tblPaket' class="table table-stripped table-compact" >
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -139,7 +169,7 @@
                                 @foreach ($paket as $b)
                                 <tr>
                                     <td>{{ $j = (!isset($j)?1:++$j) }}
-                                        <input type="hidden" class="idPaket" name="idPaket" value="{{ $b->id }}">
+                                        <input type="hidden" class="idPaket" value="{{ $b->id }}">
                                     </td>
                                     <td>{{ $b->nama_paket }}</td>
                                     <td>{{ $b->harga }}</td>
@@ -157,6 +187,10 @@
             </div>
         </div>
         {{-- Modal Paket END --}}
+
+        {{-- Tabel Penampungan --}}
+
+        {{-- Tabel penampungan END --}}
 
     </div>
 </div>
