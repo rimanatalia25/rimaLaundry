@@ -10,6 +10,7 @@ use App\Http\Controllers\PaketController;
 use App\Http\Controllers\SimulasiController;
 use App\Http\Controllers\SimulasiGajiController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\PenjemputanController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -33,6 +34,7 @@ Route::resource('/outlet', OutletController::class);
 Route::resource('/paket', PaketController::class);
 Route::resource('/inventaris', InventarisController::class);
 Route::resource('/transaksi', TransaksiController::class);
+Route::resource('/penjemputan', PenjemputanController::class);
 Route::middleware(['guest'])->group(function () {
     Route::get('login', [LoginController::class, 'index']);
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
@@ -47,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('paket', PaketController::class);
     Route::resource('outlet', OutletController::class);
     Route::get('transaksi', [TransaksiController::class, 'index']);
+    Route::resource('/penjemputan', PenjemputanController::class);
     Route::get('laporan',[LaporanController::class, 'index']);
     Route::get('member/export/xls',[MemberController::class, 'exportToExcel']);
     Route::get('/member', [MemberController::class, 'index']);
