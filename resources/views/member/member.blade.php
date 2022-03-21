@@ -34,9 +34,14 @@
                   {{-- FILL IN THIS AREA --}}
 
                    <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                Tambah Member
-                                </button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                      Tambah Member
+                  </button>
+                  
+                    <a type="button" class="btn btn-light" id="btn-expor-xls" href="member/export/xls"><i class="fa fa-file-excel-o" style="color: forestgreen"></i> Expor XLS</a>
+                    {{-- <a type="button" class="btn btn-light" id="btn-expor-xls"sdsfty6href="/member/cetakPDF"><i class="fa fa-file-pdf-o" style="color:tomato"></i> Expor PDF</a> --}}
+                    <a type="button" class="btn btn-light" id="btn-expor-xls" data-toggle="modal" data-target="#formImport" ><i class="fa fa-file-excel-o" style="color: rgb(129, 190, 255)"></i> Import Excel</a>
+                            
                               
     
                   <!-- Modal Tambah -->
@@ -171,17 +176,6 @@
                   </div>
 
                   <br>
-
-                  {{-- Ekspor --}}
-                  <div style="margin-bottom: 20px; align:center">
-                    <a type="button" class="btn btn-light" id="btn-expor-xls" href="member/export/xls"><i class="fa fa-file-excel-o" style="color: forestgreen"></i> Expor XLS</a>
-                    {{-- <a type="button" class="btn btn-light" id="btn-expor-xls" href="/member/cetakPDF"><i class="fa fa-file-pdf-o" style="color:tomato"></i> Expor PDF</a> --}}
-                    <a type="button" class="btn btn-light" id="btn-expor-xls" data-toggle="modal" data-target="#formImport" ><i class="fa fa-file-excel-o" style="color: rgb(129, 190, 255)"></i> Import Excel</a>
-                  </div>
-                  {{-- Ekspor END --}}
-
-
-
 
                   {{-- FILL IN THIS AREA END --}}
                   

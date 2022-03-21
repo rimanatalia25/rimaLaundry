@@ -14,7 +14,7 @@
               <div class="col-md-12 col-sm-12  ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Data Karyawan</h2>
+                    <h2>Data Gaji Karyawan</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -32,21 +32,19 @@
                   {{-- FILL IN THIS AREA --}}
 
                   <div class="card">
-                    <div class="card-header">
+                    {{-- <div class="card-header">
                         <h3>Gaji Karyawan</h3>
-                    </div>
+                    </div> --}}
                     <div class="card-body">
 
                         <!-- start form for validation -->
                       <form id="formKaryawan" data-parsley-validate>
-                          <label for="id"><b>ID Karyawan* :</b></label>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label for="id"><b>ID Karyawan* :</b></label>
                           <input type="id" id="id" class="form-control" name="id" data-parsley-trigger="change" required /> <br>
-
-                          <label for="nama"><b>Nama Karyawan * :</b></label>
-                          <input type="text" id="nama" class="form-control" name="nama" required /> <br>
-
-
-                          <label><b>Jenis Kelamin *:</b> </label>
+                              
+                          <label><b>Jenis Kelamin* :</b> </label>
                           <p>
                               Laki-laki:
                               <input type="radio" class="flat" name="jk" id="jk" value="L" checked="" required /> 
@@ -54,22 +52,27 @@
                               <input type="radio" class="flat" name="jk" id="jk" value="P" />
                           </p> <br>
 
-                         
-                            <label for="status"><b> Status </b> </label>
+                          <label for="anak"><b>Jumlah Anak* :</b></label>
+                          <input type="number" value="0" id="anak" class="form-control" name="anak" required readonly value="0"/> <br>
+
+                          </div>
+                          
+                          <div class="col-md-6">
+                            <label for="nama"><b>Nama Karyawan* :</b></label>
+                          <input type="text" id="nama" class="form-control" name="nama" required /> <br>
+
+                            <label for="status"><b> Status* : </b> </label>
                             <select class="custom-select" aria-label="Default select example"  name="status" id="status">
                               <option selected disabled value>Pilih Status </option>
                               <option value="single">Single</option>
                               <option value="couple">Couple</option>
-                            </select> <br> 
+                            </select> <br> <br>
                            
-                           
-                           <label for="anak"><b>Jumlah Anak * :</b></label>
-                           <input type="number" value="0" id="anak" class="form-control" name="anak" required /> <br>
-
-                          
-                            <label for="staticEmail"><b> Mulai Bekerja</b></label>
+                            <label for="staticEmail"><b> Mulai Bekerja* :</b></label>
                             <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="kerja" required> <br>
-  
+                              
+                          </div>
+                      </div>
                           <button class="btn btn-primary" id="btnSimpan" type="submit">Submit</button>
                           <button class="btn btn-danger" id="btnReset" type="reset">Reset</button>
 
@@ -141,15 +144,60 @@
 
 @push('scripts')
 <script>
-    function insert(){
+
+    // initialize
+    const GAJI_AWAL = 2000000
+    const TUNJ_MENIKAH = 250000
+    const TUNJ_ANAK = 150000
+    const TUNJ_JML_ANAK = 2
+    const TUNJ_TAHUNAN = 150000
+
+    let dataGaji = JSON.parse(localStorage.getItem('dataGaji')) || []
+    let totalGajiAwal = totalTunjangan = totalGaji = 0
+
+    function insert(dataGaji){
       const data = $('#formKaryawan').serializeArray()
       let newData = {}
       data.forEach(function(item, index){
         let name = item['name']
-        let value = (name === 'id'? Number(item['value']):item['value'])
+        let value = (name === 'id' ||
+                    name === 'anak'
+                    ? Number (['value']):item['value'])
         newData[name] = value
       })
+
+      newData['gajiAwal'] = GAJI_AWAL
+      newData['tunjangan'] = hitungTunjangan(
+        newData['kerja'],
+        newData['status'],
+        newData['anak']
+      )
+        newData['totalGaji'] = GAJI_AWAL + newData['tunjangan']
+
+        localStorage.setItem('dataGaji', JSON.stringify([ ... dataGaji, newData]))
       return newData;
+    }
+
+    function _calculateAGe(date){
+      date = new Date(date)
+      let ageDifMS = Date.now() - date.getTime()
+      let ageDate = new Date(ageDifMS)
+      return Math.abs(ageDate.getUTCFullYear() - 1970)
+    }
+
+    
+
+    function hitungTunjangan(kerja, status, anak){
+      //Tunjangan Tahunan
+      let tunjKerja = _calculateAGe(kerja) * TUNJ_TAHUNAN
+
+      //Tunjangan Pasangan
+      let tunjPasangan = status === "single"? 0: TUNJ_MENIKAH
+
+      //Tunjangan anak
+      let  tunjAnak = anak > 2? TUNJ_ANAK * 2: TUNJ_ANAK * anak
+      
+      return tunjKerja + tunjPasangan + tunjAnak
     }
 
     function showData(arr){
@@ -165,14 +213,37 @@
       row += `<td>${item['status']}</td>`
       row += `<td>${item['anak']}</td>`
       row += `<td>${item['kerja']}</td>`
+      row += `<td>${item['gajiAwal'].toLocaleString('id-ID')}</td>`
+      row += `<td>${item['tunjangan'].toLocaleString('id-ID')}</td>`
+      row += `<td>${item['totalGaji'].toLocaleString('id-ID')}</td>`
       row += `</tr>`
+
+      totalGajiAwal += item['gajiAwal']
+      totalTunjangan += item ['tunjangan']
+      totalGaji += item['totalGaji']
     })
+
+    row += `<tr>`
+    row += `<td colspan ="6">Total</td>`
+    row += `<td>${totalGajiAwal.toLocaleString('id-ID')}</td>`
+    row += `<td>${totalTunjangan.toLocaleString('id-ID')}</td>`
+    row += `<td>${totalGaji.toLocaleString('id-ID')}</td>`
+    row += `</tr>`
     return row
     }
 
+
+
+
+
+
+
     $(function(){
       //property
-      let dataKaryawan = []
+      let dataKaryawan = JSON.parse(localStorage.getItem('dataKaryawan'))|| []
+
+
+
 
       //Events
         $('#formKaryawan').on('submit', function(e){
@@ -198,6 +269,16 @@
           console.log(id)
           console.log(data)
           $('#tblKaryawan tbody').html(showData(data))
+        })
+
+        $('#status').on('change', function(){
+          if($('#status').val() === 'couple'){
+            $('#anak').removeAttr('readonly')
+            $('anak').val('0')
+          }else{
+            $('#anak').attr('readonly', '')
+            $('#anak').val('0')
+          }
         })
     //Events END
   })
@@ -229,6 +310,8 @@
     }
     return -1
   } 
+
+
 
   // const searching = (arr, text) => {
   //    if (text !== ''){

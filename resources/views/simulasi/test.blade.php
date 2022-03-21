@@ -31,9 +31,7 @@
 
                   {{-- FILL IN THIS AREA --}}
                   <div class="card">
-                      <div class="card-header">
-                          <h3>Form</h3>
-                      </div>
+                      
                       <div class="card-body">
 
                           <!-- start form for validation -->

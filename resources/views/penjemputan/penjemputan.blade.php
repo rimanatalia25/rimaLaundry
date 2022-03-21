@@ -32,6 +32,8 @@
                     </button>
                   
 
+                    
+
                         <!-- Modal Tambah -->
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -46,6 +48,7 @@
                                 {{-- @yield('createbarang') --}}
                                 <form method="POST" action="{{ 'penjemputan' }}" > 
                                     @csrf
+                                  
                                     <div class="form-group mb-3">
                                         <label for="nama">Nama Pelanggan</label>
                                         <input type="text" name="nama" class="form-control" id="nama" placeholder="...">
