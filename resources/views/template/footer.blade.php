@@ -44,23 +44,23 @@
 <script>
   $(document).ready( function () {
     $('#tableOutlet').DataTable({
-      "aLengthMenu": [[10,15,20], [5, 10, 15, 20]]
+      "aLengthMenu": [[10,15,20], [10, 15, 20]]
     });
 
     $('#tablePaket').DataTable({
-      "aLengthMenu": [[10,15,20], [5, 10, 15, 20]]
+      "aLengthMenu": [[10,15,20], [10, 15, 20]]
     });
 
     $('#tableMember').DataTable({
-      "aLengthMenu": [[10,15,20], [5, 10, 15, 20]]
+      "aLengthMenu": [[10,15,20], [10, 15, 20]]
     });
 
     $('#tableBarang').DataTable({
-      "aLengthMenu": [[10,15,20], [5, 10, 15, 20]]
+      "aLengthMenu": [[10,15,20], [10, 15, 20]]
     });
 
     $('#tableInventaris').DataTable({
-      "aLengthMenu": [[10,15,20], [5, 10, 15, 20]]
+      "aLengthMenu": [[10,15,20], [10, 15, 20]]
     });
 } );
 </script>
