@@ -28,8 +28,11 @@
 
                   <!-- Button trigger modal -->
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    Tambah Inventaris
-                    </button>
+                    <i class="fa fa-plus-square">  Tambah inventaris</i>
+                  </button>
+                    <a href="inventaris/export/xls" class="btn btn-success">
+                      <i class="fa fa-file-excel-o">   Export</i>
+                    </a>
                   
 
                     <!-- Modal -->

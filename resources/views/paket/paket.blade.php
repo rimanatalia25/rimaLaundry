@@ -28,9 +28,12 @@
 
                   <!-- Button trigger modal -->
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    Tambah paket
-                    </button>
-                  
+                   <i class="fa fa-plus-square">  Tambah paket</i>
+                  </button>
+
+                  <a href="paket/export/xls" class="btn btn-success">
+                    <i class="fa fa-file-excel-o">   Export</i>
+                  </a>
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

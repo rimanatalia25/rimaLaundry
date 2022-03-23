@@ -40,8 +40,14 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 });
 Route::get('member/export/xls',[MemberController::class, 'exportToExcel']);
+Route::get('paket/export/xls',[PaketController::class, 'exportToExcel']);
+Route::get('outlet/export/xls',[OutletController::class, 'exportToExcel']);
+Route::get('inventaris/export/xls',[InventarisController::class, 'exportToExcel']);
+Route::get('gaji/export/xls',[SimulasiGajiController::class, 'exportToExcel']);
+Route::get('penjemputan/export/xls',[PenjemputanController::class, 'exportToExcel']);
 Route::get('/member', [MemberController::class, 'index']);
 Route::get('/member/cetakPDF', [MemberController::class, 'cetakPDF']);
+// Route::get('export/paket', [PaketController::class, 'exportData'])->name('export-paket');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('home',[HomeController::class, 'index'])->name('a.home');

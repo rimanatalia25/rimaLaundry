@@ -27,9 +27,12 @@
                   {{-- FILL IN THIS AREA --}}
 
                   <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    Tambah Penjemputan
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                        <i class="fa fa-plus-square"> Tambah Penjemputan</i>
                     </button>
+                    <a href="penjemputan/export/xls" class="btn btn-success">
+                        <i class="fa fa-file-excel-o">   Export</i>
+                    </a>
                   
 
                     

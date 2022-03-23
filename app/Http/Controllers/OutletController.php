@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Outlet;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OutletExport;
 use App\Http\Requests\StoreOutletRequest;
 use App\Http\Requests\UpdateOutletRequest;
 
@@ -68,5 +70,8 @@ class OutletController extends Controller
         $model = Outlet::find($id);
         $model->delete();
         return redirect('outlet');
+    }
+    public function exportToExcel(){
+        return Excel::download(new OutletExport, 'Outlet.xlsx');
     }
 }

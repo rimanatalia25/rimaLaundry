@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Paket;
 use App\Models\Outlet;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PaketExport;
 use App\Http\Requests\StorePaketRequest;
 use App\Http\Requests\UpdatePaketRequest;
 
@@ -72,5 +74,13 @@ class PaketController extends Controller
         $model = Paket::find($id);
         $model->delete();
         return redirect('paket');
+    }
+
+    // public function exportData(){
+    //     $date = date('Y-m-d');
+    //     return Excel::download(new PaketExport, $date.'_paket.xlsx');
+    // }
+    public function exportToExcel(){
+        return Excel::download(new PaketExport, 'Paket.xlsx');
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventaris;
 use App\Http\Requests\StoreInventarisRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\InventarisExport;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateInventarisRequest;
 
@@ -90,5 +92,9 @@ class InventarisController extends Controller
         $model = Inventaris::find($id);
         $model->delete();
         return redirect('inventaris');
+    }
+
+    public function exportToExcel(){
+        return Excel::download(new InventarisExport, 'Inventaris.xlsx');
     }
 }

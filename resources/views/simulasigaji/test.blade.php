@@ -91,13 +91,18 @@
                   </div>
                   <div class="card-body">
 
+                    
+
                     <div class="form-group row">
                       <div class="col-12">
                         <div class="form-group row d-flex ml-1">
                         <button class="btn btn-success col-sm-2" type="button" id="sorting">Sorting</button>
-                        <span class="col-3"></span>
+                        {{-- <a href="gaji/export/xls" class="btn btn-success">
+                          <i class="fa fa-file-excel-o">   Export</i>
+                        </a> --}}
+                        <span class="col-2"></span>
                         <input type="search" name="search" id="search" class="form-control col-sm-4">
-                        <button class="btn btn-success col-sm-2" type="button" id="btnSearch">Search</button>
+                        <button class="btn btn-warning col-sm-2" type="button" id="btnSearch">Search</button>
                         </div>
                       </div>
                     </div>

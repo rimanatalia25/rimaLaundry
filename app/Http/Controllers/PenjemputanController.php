@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\penjemputan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PenjemputanExport;
 use App\Http\Requests\StorepenjemputanRequest;
 use App\Http\Requests\UpdatepenjemputanRequest;
 
@@ -57,5 +59,9 @@ class PenjemputanController extends Controller
         $model = Penjemputan::find($id);
         $model->delete();
         return back();
+    }
+
+    public function exportToExcel(){
+        return Excel::download(new PenjemputanExport, 'Penjemputan Laundry.xlsx');
     }
 }
