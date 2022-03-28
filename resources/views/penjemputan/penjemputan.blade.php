@@ -34,9 +34,6 @@
                         <i class="fa fa-file-excel-o">   Export</i>
                     </a>
                   
-
-                    
-
                         <!-- Modal Tambah -->
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -70,8 +67,8 @@
                                         <input type="text" name="petugas" class="form-control" id="petugas" placeholder="...">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="jenis_kelamin">Status</label>
-                                        <select class="custom-select" aria-label="Default select example"  name="jenis_kelamin" id="jenis_kelamin">
+                                        <label for="status">Status</label>
+                                        <select class="custom-select" aria-label="Default select example"  name="status" id="status">
                                             <option selected disabled value>Pilih Status </option>
                                             <option value="tercatat">Tercatat</option>
                                             <option value="penjemputan">Penjemputan</option>
@@ -151,7 +148,22 @@
                                     <td>{{ $value->alamat }}</td>
                                     <td>{{ $value->tlp }}</td>
                                     <td>{{ $value->petugas }}</td>
-                                    <td>{{ $value->status }}</td>
+                                    <td>
+                                        <form action="{{ route('penjemputan.update', $value->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="_method" value="PATCH">
+                                            <input type="hidden" name="id_member" id="id_member" value="{{ $value->id_member }}">
+                                            <input type="hidden" name="petugas" id="petugas" value="{{ $value->petugas }}">
+                                            <select value="{{ $value->status }}" class="custom-select" name="status" id="status" onchange="this.form.submit();">
+                                                {{-- <option selected disabled value>Pilih Status </option> --}}
+                                                <option value="{{ $value->status }}">{{ $value->status }}</option>
+                                                <option value="tercatat">tercatat</option>
+                                                <option value="penjemputan">penjemputan</option>
+                                                <option value="selesai">selesai</option>
+                                            </select>
+                                        </form>
+                                    </td>
                                     <td class="d-flex">
                                         {{-- <a href="{{ url('produk/' . $value->nama_produk. '/edit') }}"><button class="btn btn-primary" type="submit">Update</button></a> --}}
                                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updatemodal{{ $value->id }}">

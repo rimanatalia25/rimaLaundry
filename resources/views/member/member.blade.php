@@ -28,14 +28,23 @@
                   {{-- FILL IN THIS AREA --}}
 
                    <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                  {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                       Tambah Member
-                  </button>
+                  </button> --}}
                   
-                    <a type="button" class="btn btn-light" id="btn-expor-xls" href="member/export/xls"><i class="fa fa-file-excel-o" style="color: forestgreen"></i> Expor XLS</a>
+                    {{-- <a type="button" class="btn btn-light" id="btn-expor-xls" href="member/export/xls"><i class="fa fa-file-excel-o" style="color: forestgreen"></i> Expor XLS</a> --}}
                     {{-- <a type="button" class="btn btn-light" id="btn-expor-xls"sdsfty6href="/member/cetakPDF"><i class="fa fa-file-pdf-o" style="color:tomato"></i> Expor PDF</a> --}}
-                    <a type="button" class="btn btn-light" id="btn-expor-xls" data-toggle="modal" data-target="#formImport" ><i class="fa fa-file-excel-o" style="color: rgb(129, 190, 255)"></i> Import Excel</a>
-                            
+                   {{--<a type="button" class="btn btn-light" id="btn-expor-xls" data-toggle="modal" data-target="#formImport" ><i class="fa fa-file-excel-o" style="color: rgb(129, 190, 255)"></i> Import Excel</a> --}}
+                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    <i class="fa fa-plus-square">  Tambah Member</i>
+                   </button>
+ 
+                   <a href="member/export/xls" class="btn btn-success">
+                     <i class="fa fa-file-excel-o">   Export</i>
+                   </a>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#formImport">
+                      <i class="fa fa-file-excel-o">  Import</i>
+                    </button>     
                               
     
                   <!-- Modal Tambah -->
@@ -125,7 +134,7 @@
 
                   <div class="x_content table-responsive">
                     <table class="table table-hover " id="tableMember" >
-                      <thead>
+                      <thead align="center">
                         <tr>
                           <th>No.</th>
                           <th>Nama</th>
@@ -146,21 +155,13 @@
                             <td>{{ $value->tlp }}</td>
                             <td class="d-flex">
                                 {{-- <a href="{{ url('produk/' . $value->nama_produk. '/edit') }}"><button class="btn btn-primary" type="submit">Update</button></a> --}}
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updatemodal{{ $value->id }}">
-                                    Update
+                                <button type="button" class="btn btn-success fa fa-edit" data-toggle="modal" data-target="#updatemodal{{ $value->id }}" align="center">
                                 </button>     
                                 @include('member.edit')
 
-                                <form action="{{ route('member.destroy', $value->id) }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger source" onclick="new PNotify({
-                                      title: 'Hapus Berhasil!',
-                                      text: 'Anda telah menghapus data',
-                                      type: 'error',
-                                      styling: 'bootstrap3'
-                                  });">Hapus</button>
-                                </form>
+                                <button type="button" class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#deletemodal{{ $value->id }}">
+                                </button>  
+                                @include('member.delete')
 
                               </td>
                         </tr>

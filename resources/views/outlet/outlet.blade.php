@@ -75,8 +75,8 @@
                 
                 {{-- Modal tambah end --}}
       <div class="x_content">
-        <table class="table table-hover" id="tableOutlet">
-          <thead>
+        <table class="table table-hover" id="tableOutlet" color:"blue">
+          <thead align="center">
             <tr>
               <th>No.</th>
               <th>Nama</th>
@@ -95,21 +95,13 @@
                 <td>{{ $value->tlp }}</td>
                 <td class="d-flex">
                     {{-- <a href="{{ url('produk/' . $value->nama_produk. '/edit') }}"><button class="btn btn-primary" type="submit">Update</button></a> --}}
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updatemodal{{ $value->id }}">
-                        Update
+                    <button type="button" class="btn btn-success fa fa-edit" data-toggle="modal" data-target="#updatemodal{{ $value->id }}">
                     </button>     
                     @include('outlet.edit')
 
-                    <form action="{{ route('outlet.destroy', $value->id) }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger source" onclick="new PNotify({
-                          title: 'Hapus Berhasil!',
-                          text: 'Anda telah menghapus data',
-                          type: 'error',
-                          styling: 'bootstrap3'
-                      });">Hapus</button>
-                    </form>
+                    <button type="button" class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#deletemodal{{ $value->id }}">
+                    </button>  
+                    @include('outlet.delete')
 
                   </td>
             </tr>

@@ -8,9 +8,11 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\SimulasiController;
+use App\Http\Controllers\SimulasiTransaksiController;
 use App\Http\Controllers\SimulasiGajiController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PenjemputanController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -35,6 +37,7 @@ Route::resource('/paket', PaketController::class);
 Route::resource('/inventaris', InventarisController::class);
 Route::resource('/transaksi', TransaksiController::class);
 Route::resource('/penjemputan', PenjemputanController::class);
+Route::resource('/barang', BarangController::class);
 Route::middleware(['guest'])->group(function () {
     Route::get('login', [LoginController::class, 'index']);
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
@@ -45,6 +48,8 @@ Route::get('outlet/export/xls',[OutletController::class, 'exportToExcel']);
 Route::get('inventaris/export/xls',[InventarisController::class, 'exportToExcel']);
 Route::get('gaji/export/xls',[SimulasiGajiController::class, 'exportToExcel']);
 Route::get('penjemputan/export/xls',[PenjemputanController::class, 'exportToExcel']);
+Route::post('/member/import', [MemberController::class, 'importData']);
+Route::post('/paket/import', [PaketController::class, 'importData']);
 Route::get('/member', [MemberController::class, 'index']);
 Route::get('/member/cetakPDF', [MemberController::class, 'cetakPDF']);
 // Route::get('export/paket', [PaketController::class, 'exportData'])->name('export-paket');
@@ -93,6 +98,6 @@ Route::middleware(['auth'])->group(function () {
 //     Route::get('/member/cetakPDF', [MemberController::class, 'cetakPDF']);
 // });
 
-Route::post('/member/import', [MemberController::class, 'importData']);
 Route::get('data_karyawan', [SimulasiController::class, 'index']);
 Route::get('gaji_karyawan', [SimulasiGajiController::class, 'index']);
+Route::get('simulasi_transaksi', [SimulasiTransaksiController::class, 'index']);

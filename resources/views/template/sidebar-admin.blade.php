@@ -16,5 +16,7 @@
         {{-- <li><a href="data_karyawan"><i class="fa fa-group"></i> Simulasi Data Karyawan</a></li> --}}
         <li><a href="gaji_karyawan"><i class="fa fa-money"></i> Simulasi Gaji Karyawan</a></li>
         <li><a href="/penjemputan"><i class="fa fa-truck"></i>Penjemputan Laundry</a></li>
+        <li><a href="simulasi_transaksi"><i class="fa fa-shopping-cart"></i> Simulasi Transaksi Barang</a></li>
+        <li><a href="/barang"><i class="fa fa-dropbox"></i>Data Barang</a></li>
     </ul>
 </div>

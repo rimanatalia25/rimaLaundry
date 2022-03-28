@@ -117,6 +117,9 @@
                               <th>Status Menikah</th>
                               <th>Jumlah Anak</th>
                               <th>Mulai Bekerja</th>
+                              <th>Gaji Awal</th>
+                              <th>Tunjangan</th>
+                              <th>Total Gaji</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -160,28 +163,41 @@
     let dataGaji = JSON.parse(localStorage.getItem('dataGaji')) || []
     let totalGajiAwal = totalTunjangan = totalGaji = 0
 
-    function insert(dataGaji){
-      const data = $('#formKaryawan').serializeArray()
-      let newData = {}
-      data.forEach(function(item, index){
+    const calculateTunjangan = record => {
+      let totalTunjangan = 0;
+      const kenaikanGajiPertahun = 150000;
+      if (record.status === 'couple') {
+        let tunjanganMenikah = 250000;
+        let tunjanganPerAnak = 150000;
+
+        totalTunjangan += kenaikanGajiPertahun * _calculateAGe(record.kerja);
+        totalTunjangan += tunjanganMenikah;
+        totalTunjangan += (record.anak >= 2) ? tunjanganPerAnak * 2 : tunjanganPerAnak * record.anak;
+        return totalTunjangan;
+      } else {
+        totalTunjangan = 0;
+        return totalTunjangan;
+      }
+    }
+
+    function insert(){
+    const data = $('#formKaryawan').serializeArray()
+    let dataGaji = JSON.parse(localStorage.getItem('dataGaji')) || []
+    let newData = {}
+    data.forEach(function(item, index){
         let name = item['name']
         let value = (name === 'id' ||
-                    name === 'anak'
-                    ? Number (['value']):item['value'])
+                    name === 'anak'    
+                    ? parseInt(item['value']):item['value'])
         newData[name] = value
-      })
-
-      newData['gajiAwal'] = GAJI_AWAL
-      newData['tunjangan'] = hitungTunjangan(
-        newData['kerja'],
-        newData['status'],
-        newData['anak']
-      )
-        newData['totalGaji'] = GAJI_AWAL + newData['tunjangan']
-
-        localStorage.setItem('dataGaji', JSON.stringify([ ... dataGaji, newData]))
-      return newData;
-    }
+    })
+    newData['gaji'] = 2000000
+    newData['tunjangan'] = calculateTunjangan(newData)
+    newData['total'] = newData['gaji'] + newData['tunjangan']
+    console.log(newData)
+    localStorage.setItem('dataGaji', JSON.stringify([...dataGaji, newData]))
+    return newData
+}   
 
     function _calculateAGe(date){
       date = new Date(date)
@@ -206,36 +222,41 @@
     }
 
     function showData(arr){
-      let row = ''
-      if(arr.length == null){
-        return row = `<tr><td colspan="3">Belum ada data</td></tr>` 
+    let row = ''
+    let grandtotalgaji = 0
+    let totaltunjangan = 0
+    let totalgajiGaji = 0
+    if(arr.length == null){
+        return row = `<tr><td colspan="9" align="center">Belum ada data</td></tr>`
     }
-    arr.forEach(function(item, index){
-      row += `<tr>`
-      row += `<td>${item['id']}</td>`
-      row += `<td>${item['nama']}</td>`
-      row += `<td>${item['jk']}</td>`
-      row += `<td>${item['status']}</td>`
-      row += `<td>${item['anak']}</td>`
-      row += `<td>${item['kerja']}</td>`
-      row += `<td>${item['gajiAwal'].toLocaleString('id-ID')}</td>`
-      row += `<td>${item['tunjangan'].toLocaleString('id-ID')}</td>`
-      row += `<td>${item['totalGaji'].toLocaleString('id-ID')}</td>`
-      row += `</tr>`
-
-      totalGajiAwal += item['gajiAwal']
-      totalTunjangan += item ['tunjangan']
-      totalGaji += item['totalGaji']
+    console.log(arr)
+    arr.forEach(function(item, index) {
+      console.log(item, index)
+        grandtotalgaji += parseInt(item.total)
+        totaltunjangan += parseInt(item.tunjangan)
+        totalgajiGaji += parseInt(item.gaji)
+        row += `<tr>`
+        row += `<td>${item.id}</td>`
+        row += `<td>${item.nama}</td>`
+        row += `<td>${item.jk}</td>`
+        row += `<td>${item.status}</td>`
+        row += `<td>${item.anak}</td>`
+        row += `<td>${item.kerja}</td>`
+        row += `<td>${item.gaji}</td>`
+        row += `<td>${item.tunjangan}</td>`
+        row += `<td>${item.total}</td></tr>`
     })
 
-    row += `<tr>`
-    row += `<td colspan ="6">Total</td>`
-    row += `<td>${totalGajiAwal.toLocaleString('id-ID')}</td>`
-    row += `<td>${totalTunjangan.toLocaleString('id-ID')}</td>`
-    row += `<td>${totalGaji.toLocaleString('id-ID')}</td>`
-    row += `</tr>`
+    row += `
+        <tr class="bg-dark text-white">
+            <td colspan="6">Total</td>
+            <td>${totalgajiGaji}</td>
+            <td>${totaltunjangan}</td>
+            <td>${grandtotalgaji}</td>
+        </tr>
+    `     ;
     return row
-    }
+}
 
 
 
@@ -335,6 +356,8 @@
   //      }
   //    }
   //  } 
+
+  
 
 </script>
     

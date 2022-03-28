@@ -7,6 +7,7 @@ use App\Models\Outlet;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PaketExport;
+use App\Imports\PaketImport;
 use App\Http\Requests\StorePaketRequest;
 use App\Http\Requests\UpdatePaketRequest;
 
@@ -76,11 +77,15 @@ class PaketController extends Controller
         return redirect('paket');
     }
 
-    // public function exportData(){
-    //     $date = date('Y-m-d');
-    //     return Excel::download(new PaketExport, $date.'_paket.xlsx');
-    // }
+    
     public function exportToExcel(){
         return Excel::download(new PaketExport, 'Paket.xlsx');
+    }
+
+    public function importData(Request $request){
+        // dd( $request->file('import'));
+        Excel::import(new PaketImport, $request->file('import'));
+
+        return back()->with('success', 'Import Data Paket Berhasil!!');
     }
 }
