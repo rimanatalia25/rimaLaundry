@@ -46,7 +46,8 @@
               </button>
             </div>
             @endif
-              <form method="post" action="{{ url(request()->segment(1).'/transaksi') }}">
+              <!-- <form method="post" action="{{ url(request()->segment(1).'/transaksi') }}"> -->
+              <form method="post" action="/transaksi">
                 @csrf
                 @include('transaksi.form')
                 @include('transaksi.data')

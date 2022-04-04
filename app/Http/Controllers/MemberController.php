@@ -13,11 +13,6 @@ use App\Imports\MemberImport;
 
 class MemberController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $data = Member::all();

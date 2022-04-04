@@ -2,20 +2,19 @@
 
 namespace App\Imports;
 
-use App\Models\Member;
+use App\Models\Outlet;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class MemberImport implements ToModel, WithHeadingRow
+class OutletImport implements ToModel, WithHeadingRow
 {
 
     public function model(array $row)
     {
-        return new Member([
+        return new Outlet([
             'nama' => $row['nama'],
             'alamat' => $row['alamat'],
-            'jenis_kelamin' => $row['jenis_kelamin'],
-            'tlp' => $row['nomor_telepon']
+            'tlp' => $row['no_telepon']
         ]);
     }
 

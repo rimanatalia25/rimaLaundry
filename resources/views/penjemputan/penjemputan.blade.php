@@ -165,7 +165,7 @@
                                         </form>
                                     </td>
                                     <td class="d-flex">
-                                        {{-- <a href="{{ url('produk/' . $value->nama_produk. '/edit') }}"><button class="btn btn-primary" type="submit">Update</button></a> --}}
+                                     
                                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updatemodal{{ $value->id }}">
                                             Update
                                         </button>     

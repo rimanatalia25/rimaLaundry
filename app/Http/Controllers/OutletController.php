@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\OutletExport;
 use App\Http\Requests\StoreOutletRequest;
 use App\Http\Requests\UpdateOutletRequest;
+use App\Imports\OutletImport;
 
 class OutletController extends Controller
 {
@@ -73,5 +74,11 @@ class OutletController extends Controller
     }
     public function exportToExcel(){
         return Excel::download(new OutletExport, 'Outlet.xlsx');
+    }
+    public function importData(Request $request){
+        // dd( $request->file('import'));
+        Excel::import(new OutletImport, $request->file('import'));
+
+        return back()->with('success', 'Import Data Outlet Berhasil!!');
     }
 }

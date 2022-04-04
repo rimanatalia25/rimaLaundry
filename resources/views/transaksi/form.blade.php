@@ -21,14 +21,23 @@
 
                 <div class="row col-12" >
                     <div class="form-group row  col-6">
-                        <label for="" class="col-sm-4 col-form-label"><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalMember"><i class="fa fa-plus-square"></i></button>Nama Pelanggan/JK</label>
+                        <label for="" class="col-sm-4 col-form-label">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalMember"><i class="fa fa-plus-square"></i>
+                        </button>Nama Pelanggan/JK</label>
 
-                        <label class="col-sm-6 col-form-label" id="nama-pelanggan" style="font-weight: normal"> - </label>
+                        <label class="col-sm-6 col-form-label" style="font-weight: normal">
+                            <div  id="nama-pelanggan">
+                                -
+                            </div>
+                        </label>
                     </div>
                     
                     <div class="form-group col-6 row">
                         <label for="" class="col-2 col-form-label"> Biodata </label>
-                        <label class="col-8 ml-auto col-form-label" id="biodata-pelanggan" style="font-weight:normal"> - </label>
+                        <label class="col-8 ml-auto col-form-label" id="biodata-pelanggan" style="font-weight:normal"> 
+                        <div  id="biodata-pelanggan">
+                                -
+                            </div> </label>
 
                     </div>
                 </div>
@@ -62,7 +71,7 @@
                                 @foreach ($member as $b)
                                 <tr>
                                     <td>{{ $i = (!isset($i)?1:++$i) }}
-                                        <input type="hidden" class="idMember" name="id_member">
+                                        <input type="hidden" class="idMember" id="id_member" name="id_member" value="{{ $b->id }}">
                                     </td>
                                     <td>{{ $b->nama }}</td>
                                     <td>{{ $b->jenis_kelamin }}</td>

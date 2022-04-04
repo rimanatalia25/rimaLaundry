@@ -33,7 +33,11 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="petugas">Petugas Penjemputan</label>
-                        <select class="custom-select" aria-label="Default select example"  name="petugas" id="petugas">
+                        <input type="text" name="petugas" class="form-control" value="{{ $value->petugas }}" placeholder="No. Telp...">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="status">status Penjemputan</label>
+                        <select class="custom-select" aria-label="Default select example"  name="status" id="status">
                             <option value="tercatat">Tercatat</option>
                             <option value="penjemputan">Penjemputan</option>
                             <option value="selesai">Selesai</option>

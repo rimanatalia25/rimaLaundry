@@ -33,6 +33,9 @@
                     <a href="outlet/export/xls" class="btn btn-success">
                       <i class="fa fa-file-excel-o">   Export</i>
                     </a>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#formImport">
+                    <i class="fa fa-file-excel-o">  Import</i>
+                  </button> 
                   
 
                     <!-- Modal -->
@@ -74,6 +77,47 @@
                     </div>
                 
                 {{-- Modal tambah end --}}
+
+                {{-- Modal Impor --}}
+
+              <div class="modal fade" id="formImport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Import Data Absen</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <div class="modal-body">
+                      <form method="POST" action="/outlet/import" enctype="multipart/form-data">
+                      @csrf
+                      <div class="card-body">
+                        <div class="form-group ">
+                          <label for="jenis">File Excel</label>
+                          <input class="form-control" type="file" name="import" id="import" >
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close </button>
+                      <!-- <button type="submit" class="btn btn-primary" id="btn-submit"> Upload </button> -->
+                      <button type="submit" id="btn-submit" class="btn btn-primary source" onclick="new PNotify({
+                                  title: 'Upload data Excel Berhasil!',
+                                  text: 'Anda berhasil menambahkan data dari excel',
+                                  type: 'info',
+                                  styling: 'bootstrap3'
+                              });">Upload</button> 
+                    </div>
+                  </div>
+                </div>
+              </form>
+              </div>
+              {{-- Modal Impor END --}}
+
       <div class="x_content">
         <table class="table table-hover" id="tableOutlet" color:"blue">
           <thead align="center">

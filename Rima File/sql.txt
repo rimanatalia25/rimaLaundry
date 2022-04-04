@@ -1,0 +1,108 @@
+CREATE TABLE tb_absen_kerja (
+	id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    nama_karyawan VARCHAR(100),
+    tanggal_masuk DATE,
+    waktu_masuk_kerja TIME,
+    waktu_akhir_kerja TIME,
+    status_kerja ENUM("masuk", "sakit", "cuti"),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE tb_users ADD CONSTRAINT FOREIGN KEY (id_outlet) REFERENCES tb_outlet(id);
+ALTER TABLE tb_paket 
+ADD CONSTRAINT FOREIGN KEY (id_outlet) REFERENCES tb_outlet(id),
+ADD CONSTRAINT FOREIGN KEY (id_user) REFERENCES tb_users(id);
+ALTER TABLE tb_transaksi 
+ADD CONSTRAINT FOREIGN KEY (id_user) REFERENCES tb_users(id),
+ADD CONSTRAINT FOREIGN KEY (id_outlet) REFERENCES tb_outlet(id),
+ADD CONSTRAINT FOREIGN KEY (id_member) REFERENCES tb_member(id);
+ALTER TABLE tb_detail_transaksi ADD CONSTRAINT FOREIGN KEY (id_transaksi) REFERENCES tb_transaksi(id)
+
+INSERT INTO tb_absen_kerja(nama_karyawan, tanggal_masuk, waktu_masuk_kerja, waktu_akhir_kerja, status_kerja)
+VALUES("Karyawan 1", "2022-03-21", CURRENT_TIME, "18:00", "masuk"),
+("Karyawan 2", "2022-03-22", CURRENT_TIME, "18:00", "masuk"),
+("Karyawan 3", "2022-03-23", CURRENT_TIME, "18:00", "masuk"),
+("Karyawan 4", "2022-03-24", CURRENT_TIME, "18:00", "sakit"),
+("Karyawan 5", "2022-03-25", CURRENT_TIME, "18:00", "sakit"),
+("Karyawan 6", "2022-03-26", CURRENT_TIME, "18:00", "sakit"),
+("Karyawan 7", "2022-03-27", CURRENT_TIME, "18:00", "cuti"),
+("Karyawan 8", "2022-03-28", CURRENT_TIME, "18:00", "cuti"),
+("Karyawan 9", "2022-03-29", CURRENT_TIME, "18:00", "cuti"),
+("Karyawan 10", "2022-03-30", CURRENT_TIME, "18:00", "masuk");
+
+SELECT * FROM tb_absen_kerja WHERE status_kerja = "sakit" AND tanggal_masuk = "2022-03-22";
+
+UPDATE tb_absen_kerja SET nama_karyawan="Ihsan" WHERE tanggal_masuk BETWEEN "2022-03-21" AND "2022-03-23";
+
+//
+CREATE PROCEDURE getDataStatusTransaksi(p_status VARCHAR(100), p_jenis VARCHAR(100))
+BEGIN
+
+SELECT T.id, T.tgl, T.status, M.nama, M.alamat, M.jenis_kelamin, P.nama_paket, P.jenis, P.harga
+FROM tb_transaksi T 
+INNER JOIN tb_member M ON T.id_member = M.id
+INNER JOIN tb_detail_transaksi DT ON T.id = DT.id_transaksi
+INNER JOIN tb_paket P ON DT.id_paket = P.id
+WHERE T.status = p_status
+AND P.jenis = p_jenis;
+
+END
+//
+
+CALL getDataStatusTransaksi("selesai", "kaos");
+
+//
+CREATE FUNCTION getUangBayar(p_tgl DATE) RETURNS INT
+BEGIN
+DECLARE uang_bayar INT DEFAULT 0;
+
+SELECT SUM(P.harga * DT.qty) INTO uang_bayar FROM tb_transaksi T
+INNER JOIN tb_detail_transaksi DT ON T.id = DT.id_transaksi
+INNER JOIN tb_paket P ON DT.id_paket = P.id
+WHERE T.tgl = p_tgl AND T.dibayar = "dibayar";
+
+RETURN uang_bayar;
+END
+//
+
+CREATE TRIGGER onInsertAbsen
+AFTER INSERT ON tb_absen_kerja
+FOR EACH ROW
+BEGIN
+INSERT INTO tb_logging(aksi, nama_table, waktu, id_user)
+VALUES ('Insert Absen', 'absen kerja', CURRENT_DATE, 1);
+END
+//
+
+CREATE TRIGGER onUpdateAbsen
+AFTER UPDATE ON tb_absen_kerja
+FOR EACH ROW
+BEGIN
+INSERT INTO tb_logging(aksi, nama_table, waktu, id_user)
+VALUES ('Update Absen', 'absen kerja', CURRENT_DATE, 1);
+END
+//
+
+CREATE TRIGGER onDeleteAbsen
+BEFORE DELETE ON tb_absen_kerja
+FOR EACH ROW
+BEGIN
+INSERT INTO tb_logging(aksi, nama_table, waktu, id_user)
+VALUES ('Delete Absen', 'absen kerja', CURRENT_DATE, 1);
+END
+//
+
+CREATE VIEW v_transaksi_selesai AS
+SELECT T.id, T.tgl, T.status, M.nama, M.alamat, M.jenis_kelamin, SUM(P.harga * DT.qty) AS total_bayar
+FROM tb_transaksi T 
+INNER JOIN tb_member M ON T.id_member = M.id
+INNER JOIN tb_detail_transaksi DT ON T.id = DT.id_transaksi
+INNER JOIN tb_paket P ON DT.id_paket = P.id
+WHERE T.status = "selesai"
+GROUP BY T.id;
+
+START TRANSACTION;
+INSERT INTO tb_absen_kerja(nama_karyawan, tanggal_masuk, waktu_masuk_kerja, waktu_akhir_kerja, status_kerja)
+VALUES("Azfa", "2022-03-30", CURRENT_TIME, "18:00", "sakit");
+ROLLBACK;

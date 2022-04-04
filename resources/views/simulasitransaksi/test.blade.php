@@ -61,7 +61,7 @@
 
 
                             <label for="harga"><b>Harga Barang* :</b></label>
-                            <input type="text" id="harga" class="form-control" name="harga" required /> <br><br><br>
+                            <input type="number" id="harga" class="form-control" name="harga" required /> <br><br><br>
 
                             <label><b>Jenis Pembayaran* :</b> </label>
                          
@@ -72,22 +72,7 @@
                            <br> <br><br>
 
                            
-                           <div class="form-group">
-                            <label for="harga_barang" class="col-sm-2 col-form-label">Harga Barang</label>
-                            <input type="" readonly name="harga_barang" id="harga_barang">
-                        </div>
-                        <div class="form-group row">
-                            <label for="diskon" class="col-sm-9 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <input type="hidden" class="form-control" id="diskon" name="diskon" placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="total" class="col-sm-9 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <input type="hidden" class="form-control" id="total" name="total" placeholder="" required>
-                            </div>
-                        </div>
+            
 
                             
 
@@ -167,17 +152,18 @@
 @push('scripts')
 <script>
     function insert(){
-    const data = $('#tblSImulasiTransaksi').serializeArray()
+    const data = $('#tblSimulasiTransaksi').serializeArray()
     let dataSimulasiTransaksi = JSON.parse(localStorage.getItem('dataSimulasiTransaksi')) || []
     let newData = {}
     data.forEach(function(item, index){
         let name = item['name']
         let value = (name === 'id' ||
                     name === 'jumlah'    
-                    ? parseInt(item['value']):item['value'])
+                    ? Number(item['value']):item['value'])
         newData[name] = value
     })
-        newData['diskon'] = (newData['harga'] * newData['jumlah']) * (calculateDiskon(newData)/100)
+        newData['diskon'] = calculateDiskon(newData['harga'],
+                                                                   newData['jumlah'])
 newData['total_harga'] = (newData['harga'] * newData['jumlah']) - newData['diskon']
     localStorage.setItem('dataSimulasiTransaksi', JSON.stringify([...dataSimulasiTransaksi, newData]))
     return newData
@@ -212,8 +198,8 @@ newData['total_harga'] = (newData['harga'] * newData['jumlah']) - newData['disko
       row += `</tr>`
     })
 
-    row += `<tr>`
-    row += `<td colspan ="3">Total</td>`
+    row += `<tr style="background:black;color:white;font-weight:bold;font-size:1em">`
+    row +=`<td colspan="3 " align="center">Total</td>`
     row += `<td>${totalHarga}</td>`
     row += `<td>${totalQty}</td>`
     row += `<td>${totalDiskon}</td>`
@@ -324,6 +310,13 @@ newData['total_harga'] = (newData['harga'] * newData['jumlah']) - newData['disko
     }
     return -1
   }
+  const calculateDiskon = (harga, jumlah) => {
+           
+           total_harga = harga * jumlah
+           diskon1 = 0.15 * total_harga
+            let calculateDiskon = total_harga > 50000? diskon1 : 0
+            return calculateDiskon
+        }
 
   // const searching = (arr, text) => {
   //   if (text !== ''){

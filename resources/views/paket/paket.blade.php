@@ -114,7 +114,7 @@
                       <div class="card-body">
                         <div class="form-group ">
                           <label for="jenis">File Excel</label>
-                          <input type="file" name="import" id="import" class="form-control">
+                          <input class="form-control" type="file" name="import" id="import" >
                         </div>
                       </div>
                     </div>
