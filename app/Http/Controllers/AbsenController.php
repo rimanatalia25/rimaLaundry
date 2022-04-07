@@ -13,35 +13,48 @@ use Illuminate\Http\Request;
 
 class AbsenController extends Controller
 {
+    /**
+     * pertama kali diakses, dan  juga merupakan fungsi default, 
+     * jika saat memanggil class tanpa menyebutkan fungsinya. 
+    */
 
-    // pertama kali diakses, dan  juga merupakan fungsi default, jika saat memanggil class tanpa menyebutkan fungsinya. 
     public function index()
     {
         $data = Absen::all();
         return view('absen/absen', compact('data')); 
     }
 
-   //untuk menampilkan form create post
+    /**
+     * untuk menampilkan form create post
+     */
+   
     public function create()
     {
         $model = new Absen;
         return view('absen/absen', compact('model'));
     }
-
-    //  untuk menginputkan table ke database
+    
+    /**
+     *  untuk menginputkan table ke database
+     */
     public function store(Request $request)
     {
         Absen::create($request->all());
         return redirect ('absen');
     }
 
-    //untuk menampilkan detail dari sebuah post
+    /** 
+     * untuk menampilkan detail dari sebuah post
+    */
+
     public function show(Absen $absen)
     {
         //
     }
 
-    //  untuk menampilkan halaman edit
+    /** 
+     *  untuk menampilkan halaman edit
+    */
     public function edit($id)
     {
         $model = Absen::find($id);
@@ -50,7 +63,9 @@ class AbsenController extends Controller
         ));
     }
 
-    //untuk melakukan perubahan data yang dikirim ke database
+    /** 
+     * untuk melakukan perubahan data yang dikirim ke database
+    */
     public function update(Request $request, $id)
     {
         $model = Absen::findOrFail($id)->update($request->all());
@@ -60,7 +75,9 @@ class AbsenController extends Controller
         return back();
     }
 
-    //  untuk menghapus data pada table di database
+    /**
+     * untuk menghapus data pada table di database
+     */
     public function destroy($id)
     {
         $model = Absen::find($id);
@@ -68,12 +85,16 @@ class AbsenController extends Controller
         return back();
     }
 
-    //  yang digunakan untuk export ke Excel
+    /**
+     * yang digunakan untuk export ke Excel
+     */
     public function exportToExcel(){
         return Excel::download(new AbsenExport, 'Absen.xlsx');
     }
 
-    //  yang digunakan untuk cetak atau export ke PDF
+    /**
+     * yang digunakan untuk cetak atau export ke PDF
+     */
     public function cetakPDF()
     {
         $Absen = Absen::all();
@@ -82,7 +103,9 @@ class AbsenController extends Controller
         // return $pdf->download('laporan-Absen-pdf');
     }
 
-    //  yang digunakan untuk mengimport atau mengambil data excel ke table
+    /**
+     * yang digunakan untuk mengimport atau mengambil data excel ke table
+     */  
     public function importData(Request $request){
         // dd( $request->file('import'));
         Excel::import(new AbsenImport, $request->file('import'));

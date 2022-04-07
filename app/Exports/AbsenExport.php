@@ -14,9 +14,7 @@ use Maatwebsite\Excel\Sheet;
 
 class AbsenExport implements FromCollection, WithHeadings, WithEvents
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+
     public function collection()
     {
         return Absen::all();
